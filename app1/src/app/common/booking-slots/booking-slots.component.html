@@ -1,0 +1,17 @@
+<div class="flex flex-col gap-[24px] w-[380px] min-h-[384px] p-[24px] rounded-[5px] border-neutral-variant-80 bg-neutral-90 bg-opacity-[0.16]">
+    <div class="flex justify-between">
+        <div class="text-body-1-semibold text-neutral-10">Preview Slots</div>
+        <mat-icon class="material-symbols-outlined w-[24px] h-[24px] text-[24px] text-neutral-10 text-opacity-[0.38]">help</mat-icon>
+    </div>
+    <div class="flex flex-col gap-[16px] w-full">
+        <div class="grid grid-cols-3 gap-[16px]">
+            <div *ngFor="let timeSlot of timeSlots" class="justify-center items-center 
+            py-[16px] px-[18.5px] border rounded-[5px] border-neutral-variant-80
+             text-neutral-10 font-medium text-[14.3px] leading-[20.02px]">
+                {{timeSlot}}
+            </div>
+        </div>
+        <div class="text-neutral-variant-30 text-note-medium">Note: Slots based on default working hours.</div>
+    </div>
+    
+</div>

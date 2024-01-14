@@ -1,0 +1,70 @@
+<div class="flex flex-col h-full w-full justify-center items-center">
+    <!-- header -->
+    <div class="w-full fixed flex top-0 px-[32px] py-[16px] justify-between">
+        <img src="../../../../../../assets/brand.svg" alt="brand logo" />
+        <Button type="stroked" (onClick)="onSaveAndExit()">
+            Save & exit
+        </Button>
+    </div>
+
+    <!-- content -->
+    <div class="w-[800px] py-[32px] flex items-center left-[328px] justify-center">
+        <div class="flex flex-col gap-[40px]">
+            <div class="flex flex-col gap-[8px]">
+                <div class="text-subheading-2-semibold text-neutral-10">Lets enhance the booking options</div>
+                <div class="text-body-1-medium text-neutral-variant-30">Scheduling interval helps in splitting the time for customers to choose a slot.</div>
+            </div>
+            <div class="flex gap-[40px]">
+                <div class="flex flex-col gap-[40px] w-[380px]">
+                    <div class="flex flex-col gap-[8px]">
+                        <div class="flex flex-col border border-neutral-variant-80">
+                            <div class="flex justify-between p-[16px] text-body-1-semibold text-neutral-10 bg-neutral-variant-80 bg-opacity-[0.38] ">
+                                <div>Call duration</div>
+                                <div>{{duration}} mins</div>
+                            </div>
+                            <div class="flex justify-between p-[16px] text-body-1-semibold text-neutral-10 bg-neutral-variant-80 bg-opacity-[0.38] ">
+                                <div>Buffer duration</div>
+                                <div>{{buffer}} mins</div>
+                            </div>
+                        </div>
+                        <div class="text-note-medium text-neutral-variant-30">To edit, go to basic settings</div>
+                    </div>
+                    <div class="flex flex-col gap-[24px]">
+                        <div class="flex flex-col gap-[4px]">
+                            <div class="text-body-1-semibold text-neutral-10">Scheduling Interval</div>
+                            <div class="text-caption-medium text-neutral-variant-30">Time for customers to choose a slot</div>
+                        </div>
+                        <div class="flex flex-col gap-[16px]">
+                            <mat-form-field appearance="outline" floatLabel="always" class="h-14">
+                                <mat-label>Time</mat-label>
+                                <input matInput formControlName="schedulingInterval" type="text" placeholder="Time">
+                                <div matSuffix class="pr-[16px]">mins</div>
+                            </mat-form-field>
+                            <div class="flex gap-[8px]">
+                                <div *ngFor="let schedulingInterval of schedulingIntervalList" (click)="addSchedulingInterval(schedulingInterval)"
+                                    class="border text-primary-40 border-neutral-variant-80 rounded-[60px] bg-primary-40 bg-opacity-[0.04] flex justify-center items-center py-[4px] pl-[8px] pr-[12px] cursor-pointer">
+                                    <mat-icon class="w-[18px] h-[18px] text-[18px]">add</mat-icon>
+                                    <div class="text-caption-medium">{{schedulingInterval}} min</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <app-booking-slots [intervalUnit]="60"></app-booking-slots>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="w-full fixed flex bottom-0 justify-between px-[32px] py-[16px]">
+        <Button type="text" (onClick)="onBack()">
+            <div class="text-primary-40">
+                Back
+            </div>
+        </Button>
+        <Button type="filled" (onClick)="onNext()">
+            Next
+        </Button>
+    </div>
+</div>

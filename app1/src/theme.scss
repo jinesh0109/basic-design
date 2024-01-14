@@ -1,0 +1,34 @@
+@use '@angular/material' as mat;
+
+//core mixins
+@include mat.core();
+
+
+$primary: mat.define-palette(mat.$blue-palette, A700);
+$accent: mat.define-palette(mat.$pink-palette, A400);
+
+$custom-theme: mat.define-light-theme((
+ color: (
+   primary: $primary,
+   accent: $accent,
+ ) 
+));
+
+@include  mat.all-component-themes($custom-theme);
+
+//typography
+$custom-typography-config: mat.define-typography-config($font-family: 'General Sans',
+  $headline-5: mat.define-typography-level(52px, 78px, 600),
+  $headline-4: mat.define-typography-level(48px, 72px, 600),
+  $headline-3: mat.define-typography-level(40px, 60px, 600),
+  $headline-2: mat.define-typography-level(36px, 54px, 600),
+  $headline-1: mat.define-typography-level(32px, 48px, 600),
+  $subtitle-2: mat.define-typography-level(24px, 36px, 500),
+  $subtitle-1: mat.define-typography-level(20px, 30px, 500),
+  $body-2: mat.define-typography-level(18px, 27px, 500),
+  $body-1: mat.define-typography-level(16px, 24px, 500),
+  $caption: mat.define-typography-level(14px, 21px, 500),
+  $button: mat.define-typography-level(16px, 24px, 500),
+);
+
+@include mat.typography-hierarchy($custom-typography-config);

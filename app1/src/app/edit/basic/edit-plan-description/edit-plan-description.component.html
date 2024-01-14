@@ -1,0 +1,36 @@
+<div class="flex flex-col h-full w-full justify-center items-center">
+    <!-- header -->
+    <div class="w-full fixed flex top-0 px-[32px] py-[16px] justify-between">
+        <img src="../../../../../../assets/brand.svg" alt="brand logo" />
+        <Button type="stroked" (onClick)="onSaveAndExit()">
+            Save & exit
+        </Button>
+    </div>
+
+    <!-- content -->
+    <div class="w-[800px] py-[32px] flex items-center left-[328px] px-[120px]">
+        <div class="flex flex-col gap-[40px] justify-start">
+            <div class="flex flex-col gap-[8px]">
+                <div class="text-subheading-2-semibold text-neutral-10">Write a description</div>
+                <div class="text-body-1-medium text-neutral-variant-30">Tell your customers what exactly to expect from
+                    this plan.
+                </div>
+            </div>
+            <form [formGroup]="planForm" class="flex">
+                    <quill-editor [placeholder]="''" [modules]="quillConfiguration" class="min-h-[142px]" formControlName="description" ></quill-editor>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="w-full fixed flex bottom-0 justify-between px-[32px] py-[16px]">
+        <Button type="text" (onClick)="onBack()">
+            <div class="text-primary-40">
+                Back
+            </div>
+        </Button>
+        <Button type="filled" (onClick)="onNext()">
+            Next
+        </Button>
+    </div>
+</div>

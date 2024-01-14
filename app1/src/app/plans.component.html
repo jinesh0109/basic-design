@@ -1,0 +1,177 @@
+<div class="flex flex-col gap-[16px] min-h-screen px-[48px] py-[24px]">
+    <div class="w-[800px] flex flex-col mb-[16px]">
+        <!-- Plan header -->
+        <div class="flex space-x-[16px]">
+            <div class="flex flex-col space-y-[16px]">
+                <div class="flex flex-col gap-[8px]">
+                    <div class="flex gap-[4px] items-baseline">
+                        <p class="text-subheading-1-semibold text-neutral-10">
+                            Plans.
+                        </p>
+                        <span class="text-subheading-1-semibold text-neutral-10 opacity-[0.38]">Clear roadmap of
+                            tasks.</span>
+                    </div>
+                    <p class="text-neutral-variant-30 text-body-1-medium">
+                        Specified set of tasks and responsibilities that have to be delivered to the customer.
+                    </p>
+                </div>
+                <Button type="stroked" class="flex" (onClick)="navigateToCreatePlanWorkflow()">
+                    <div class="flex items-center justify-content gap-[8px] font-sans text-body-1-medium">
+                        <mat-icon class="text-[18px] h-[18px] w-[18px]">
+                            add
+                        </mat-icon>
+                        <span class="text-body-1-medium flex tracking-normal">Create Plan</span>
+                    </div>
+                </Button>
+            </div>
+            <!-- Illustration -->
+            <img src="../../../../../assets/illustration.svg" alt="">
+        </div>
+        <div class="flex gap-[8px] pt-[8px] mt-[40px]">
+            <div class="flex items-center gap-[8px] rounded-[62px] h-[44px] px-[16px] py-[8px] cursor-pointer border"
+                (click)="planType='One-on-one'"
+                [ngClass]="{ 'bg-primary-40': planType === 'One-on-one', 'bg-opacity-[0.08]': planType === 'One-on-one','border-l-neutral-variant-80':planType==='One-on-one', 'border-[0px]':planType==='One-on-one'}">
+                <div class="flex items-center">
+                    <img src="../../../../assets/icons/plan_type_icon.svg" alt="Plan type" class="">
+                    <!-- <mat-icon class="material-symbols-outlined w-[20px] h-[20px] text-[20px]">share</mat-icon> -->
+                </div>
+                <div class="text-neutral-10 text-caption-medium leading-[18.9px]">One-on-one</div>
+            </div>
+            <div class="flex items-center gap-[8px] rounded-[62px] h-[44px] px-[16px] py-[8px] cursor-pointer border"
+                (click)="planType='Group'"
+                [ngClass]="{ 'bg-primary-40': planType === 'Group', 'bg-opacity-[0.08]': planType === 'Group','border-l-neutral-variant-80':planType==='Group','border-[0px]':planType==='Group'}">
+                <div class="flex items-center">
+                    <img src="../../../../assets/icons/plan_type_icon.svg" alt="Plan type" class="">
+                    <!-- <mat-icon class="material-symbols-outlined w-[20px] h-[20px] text-[20px]">share</mat-icon> -->
+                </div>
+                <div class="text-neutral-10 text-caption-medium leading-[18.9px]">Group</div>
+            </div>
+            <div class="flex items-center gap-[8px] rounded-[62px] h-[44px] px-[16px] py-[8px] cursor-pointer border"
+                (click)="planType='Documents'"
+                [ngClass]="{ 'bg-primary-40': planType === 'Documents', 'bg-opacity-[0.08]': planType === 'Documents','border-[0px]':planType==='Documents'}">
+                <div class="flex items-center">
+                    <img src="../../../../assets/icons/plan_type_icon.svg" alt="Plan type" class="">
+                    <!-- <mat-icon class="material-symbols-outlined w-[20px] h-[20px] text-[20px]">share</mat-icon> -->
+                </div>
+                <div class="text-neutral-10 text-caption-medium leading-[18.9px]">Documents</div>
+            </div>
+        </div>
+        <!-- Plans table -->
+        <div class="flex flex-col w-[800px] border-[1px] rounded-[5px] border-neutral-variant-80 mt-[16px]">
+            <div class="flex items-center p-[16px] bg-[#F5F3F7] gap-[49px] rounded-t-[5px] border-b-[1px]">
+                <div class="w-[364px] text-body-1-medium text-neutral-variant-30">
+                    Plan
+                </div>
+                <div class="w-[60px] text-body-1-medium text-neutral-variant-30">
+                    Price
+                </div>
+                <div class="w-[246px] text-body-1-medium text-neutral-variant-30">
+                    Status
+                </div>
+            </div>
+            <ng-container *ngIf="!loadingPlans; else loadingTemplate">
+                <ng-container *ngFor="let plan of plans;last as isLast">
+                    <div class="border-neutral-variant-80 hover:bg-primary-40 hover:bg-opacity-[0.04] cursor-pointer"
+                        [ngClass]="{'border-b-[1px]': !isLast}" (mouseenter)="plansActiveState[plan.id]=true" (mouseleave)="plansActiveState[plan.id]=false">
+                        <div class="flex items-center justify-between p-[16px]">
+                            <div class="flex gap-[49px] items-center">
+                                <div class="flex w-[364px]">
+                                    <div class="flex-col space-y-[4px]">
+                                        <div
+                                            class="text-note-medium text-neutral-30 py-[4px] px-[10px] bg-neutral-variant-45 rounded-[5px] inline-block">
+                                            Income Tax / Tax Filing
+                                        </div>
+                                        <div class="text-body-1-medium text-neutral-10">
+                                            {{plan.title}}
+                                        </div>
+                                        <div class="text-caption-medium text-neutral-variant-30">
+                                            {{plan.duration}} {{plan.durationUnit=="minute"?"mins":"hr"}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex w-[60px] items-center text-body-1-medium text-neutral-variant-30">
+                                    ₹{{plan.price}}
+                                </div>
+                                <div class="flex items-center w-[101px] gap-2">
+                                    <div class="flex items-center justify-center w-[20px] h-[20px] rounded-[10px]"
+                                        [ngClass]="{'bg-alert-success-50':plan.status ==='published','bg-alert-warning-50': plan.status === 'draft','bg-neutral-94': plan.status === 'archived'}">
+                                        <div class="w-[10px] h-[10px] rounded-[5px]"
+                                            [ngClass]="{'bg-alert-success-900':plan.status ==='published','bg-alert-warning-900': plan.status === 'draft', 'bg-secondary-40': plan.status === 'archived'}">
+                                        </div>
+                                    </div>
+                                    <div class="text-body-1-medium text-neutral-10">
+                                        {{plan.status.charAt(0).toUpperCase() + plan.status.slice(1)}}
+                                    </div>
+                                </div>
+                                <div class="flex items-center w-[96px] gap-[16px]">
+                                    <div class="p-[8px] w-[40px] h-[40px] hover:bg-primary-40 hover:bg-opacity-[0.04] cursor-pointer rounded-[20px]"
+                                        *ngIf="plan.status=='published' && plansActiveState[plan.id]==true">
+                                        <mat-icon class="material-symbols-outlined ">
+                                            share
+                                        </mat-icon>
+                                    </div>
+                                    <div class="w-full"
+                                        *ngIf="plan.status!='published' || plansActiveState[plan.id]!=true">
+                                    </div>
+                                    <div class="p-[8px] h-[40px] w-[40px] hover:bg-primary-40 hover:bg-opacity-[0.04] cursor-pointer rounded-[20px]">
+                                        <mat-icon material-symbols-outlined class="text-[24px] h-[24px] w-[24px]">
+                                            more_vert
+                                        </mat-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between py-[14px] pl-[16px] pr-[24px] bg-alert-warning-50 cursor-default"
+                            *ngIf="plan.status=='draft'">
+                            <div class="text-neutral-10 text-note-medium flex items-center">
+                                <div class="flex items-center justify-center">
+                                    <mat-icon
+                                        class="material-symbols-outlined text-alert-warning-900 text-[20px] h-[20px] w-[20px]">error</mat-icon>
+                                </div>
+                                <div class="mr-[8px] ml-[4px] text-note-medium text-alert-warning-900">Details not found</div>
+                                <div class="text-note-medium">Enter basic details to publish plan</div>
+                            </div>
+                            <div class="text-primary-40 text-note-medium cursor-pointer">Learn More</div>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+            <ng-template #loadingTemplate>
+                <div *ngFor="let num of [1,2,3,4]last as isLast"
+                    class="flex items-center justify-between p-[16px] border-neutral-variant-80"
+                    [ngClass]="{'border-b-[1px]': !isLast}">
+                    <div class="flex w-[364px] items-center">
+                        <!-- Plan Name and Description -->
+                        <div class="flex flex-col space-y-[4px]">
+                            <ngx-skeleton-loader
+                                [theme]="{height: '18px',width:'364px',margin:'0px','padding':'0px'}"></ngx-skeleton-loader>
+                            <ngx-skeleton-loader
+                                [theme]="{height: '24px',width:'364px',margin:'0px','padding':'0px'}"></ngx-skeleton-loader>
+                            <ngx-skeleton-loader
+                                [theme]="{height: '24px',width:'364px',margin:'0px','padding':'0px'}"></ngx-skeleton-loader>
+                        </div>
+                    </div>
+                    <!-- Plan price -->
+                    <ngx-skeleton-loader
+                        [theme]="{height: '24px',width:'60px',margin:'0px','padding':'0px'}"></ngx-skeleton-loader>
+                    <!-- Status -->
+                    <div class="flex w-[101px] gap-2 items-center">
+                        <ngx-skeleton-loader
+                        [theme]="{height: '20px',width:'20px',margin:'0px','padding':'0px'}"></ngx-skeleton-loader>
+                        <ngx-skeleton-loader
+                            [theme]="{height: '24px',width:'72px',margin:'0px','padding':'0px'}"></ngx-skeleton-loader>
+                    </div>
+                    <div class="p-[8px] gap-[8px]">
+                        <mat-icon material-symbols-outlined>
+                            more_vert
+                        </mat-icon>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+
+    </div>
+    <app-pagination type="Plans" [pageSize]="pageSize" [currentPage]="currentPage" (onNext)="nextPage()"
+        (onPrevious)="previousPage()"></app-pagination>
+</div>

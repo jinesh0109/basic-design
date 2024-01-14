@@ -1,0 +1,36 @@
+<div class="flex flex-col h-full w-full justify-center items-center">
+    <!-- header -->
+    <div class="w-full fixed flex top-0 px-[32px] py-[16px] justify-between">
+        <img src="../../../../../../assets/brand.svg" alt="brand logo"/>
+    </div>
+
+    <!-- content -->
+    <div class="w-[800px] py-[32px] flex items-center left-[328px]">
+        <div class="flex gap-[48px] w-full items-center">
+            <div class="flex flex-col gap-[16px] justify-start w-[385px]">
+                <div class="flex flex-col gap-[4px]">
+                    <div class="text-body-1-medium text-neutral-10">Step 1</div>
+                    <div class="text-title-semibold text-neutral-10">Make your plan stand out</div>
+                </div>
+                <div class="flex text-body-1-medium text-neutral-variant-30">
+                    Tell us about the plan. In this step, you will add a name, description and label to the plan. You will also choose the type of plan you’re configuring.
+                </div>
+            </div>
+            <div class="flex-1 h-[297px]" style="background-color: #D9D9D9; opacity: 30%;">
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="w-full fixed flex bottom-0 justify-between px-[32px] py-[16px]">
+        <Button type="text" (onClick)="onCancel()">
+            <div class="text-primary-40">
+                Cancel
+            </div>
+        </Button>
+        <Button type="filled" (onClick)="onNext()">
+            Next
+        </Button>
+    </div>
+</div>
